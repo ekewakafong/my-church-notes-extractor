@@ -1,0 +1,21 @@
+{
+  "system_title": "Edward's Church Notes",
+  "church_name": "Lord of Hosts Church",
+  "bible_translation": "NKJV",
+  "bible_id": "114",
+  "repository": "ekewakafong/my-church-notes-extractor",
+  "authors": [
+    {
+      "name": "Edward Fong",
+      "short_name": "Edward",
+      "slug": "edward-fong",
+      "primary": true
+    },
+    {
+      "name": "Julia Fong",
+      "short_name": "Julia",
+      "slug": "julia-fong",
+      "primary": false
+    }
+  ]
+}
