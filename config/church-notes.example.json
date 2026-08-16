@@ -1,0 +1,21 @@
+{
+  "system_title": "My Church Notes",
+  "church_name": "Example Church",
+  "bible_translation": "NKJV",
+  "bible_id": "114",
+  "repository": "owner/repository",
+  "authors": [
+    {
+      "name": "John Smith",
+      "short_name": "John",
+      "slug": "john-smith",
+      "primary": true
+    },
+    {
+      "name": "Mary Smith",
+      "short_name": "Mary",
+      "slug": "mary-smith",
+      "primary": false
+    }
+  ]
+}

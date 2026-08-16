@@ -1,0 +1,72 @@
+name: Configure Church Notes System
+
+on:
+  workflow_dispatch:
+    inputs:
+      primary_name:
+        description: "Your name (example: John Smith)"
+        required: true
+        type: string
+      additional_names:
+        description: "Other people who will have notes, separated by commas (optional)"
+        required: false
+        type: string
+      church_name:
+        description: "Church name (optional)"
+        required: false
+        type: string
+      bible_translation:
+        description: "Default Bible translation"
+        required: true
+        default: "NKJV"
+        type: choice
+        options:
+          - NKJV
+          - KJV
+          - NIV
+          - ESV
+          - NLT
+          - NASB
+          - CSB
+      system_title:
+        description: "Name for this notes system (optional)"
+        required: false
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  configure:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Configure notes system
+        env:
+          PRIMARY_NAME: ${{ inputs.primary_name }}
+          ADDITIONAL_NAMES: ${{ inputs.additional_names }}
+          CHURCH_NAME: ${{ inputs.church_name }}
+          BIBLE_TRANSLATION: ${{ inputs.bible_translation }}
+          SYSTEM_TITLE: ${{ inputs.system_title }}
+          REPOSITORY: ${{ github.repository }}
+        run: python tools/configure.py
+
+      - name: Commit personalized setup
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add config prompts notes START-HERE.md SETUP-COMPLETE.md README.md
+          if git diff --cached --quiet; then
+            echo "Nothing changed."
+          else
+            git commit -m "Configure church notes system"
+            git push
+          fi
